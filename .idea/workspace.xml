@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="83f12e8a-9161-4f20-bc01-bf494c02e68d" name="Changes" comment="" />
+    <list default="true" id="83f12e8a-9161-4f20-bc01-bf494c02e68d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/app/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/globe.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/next.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/window.svg" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,32 +26,120 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="7.397272016998672E-14" />
+      <entry key="MS500" value="0.0023649101737857735" />
+      <entry key="S2" value="0.2270535066193693" />
+      <entry key="S5" value="0.6913865939429288" />
+      <entry key="S10" value="1.2410178117644692" />
+      <entry key="S30" value="2.4119366547989887" />
+      <entry key="S60" value="3.068793740827863" />
+      <entry key="M2" value="3.781188651843684" />
+      <entry key="M5" value="6.131240911589049" />
+      <entry key="M10" value="13.655398274116111" />
+      <entry key="M15" value="24.764131851028477" />
+      <entry key="M30" value="61.653179675899494" />
+      <entry key="H1" value="114.4258389138098" />
+      <entry key="H2" value="164.38781808946777" />
+      <entry key="H4" value="200.2522668840481" />
+      <entry key="D1" value="238.2906864893384" />
+      <entry key="W1" value="245.73078050942115" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000000015213508" />
+      <entry key="S5" value="1.000297092540005" />
+      <entry key="S10" value="1.0172363725883733" />
+      <entry key="S30" value="1.2583319848912546" />
+      <entry key="S60" value="1.5124393469813922" />
+      <entry key="M2" value="1.7781061898724424" />
+      <entry key="M5" value="2.416913919662587" />
+      <entry key="M10" value="4.557292360057621" />
+      <entry key="M15" value="7.350259617980688" />
+      <entry key="M30" value="14.708845030409913" />
+      <entry key="H1" value="23.197279985193298" />
+      <entry key="H2" value="30.28362675595464" />
+      <entry key="H4" value="35.05053860277562" />
+      <entry key="D1" value="39.90994406878184" />
+      <entry key="W1" value="40.841608892985406" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="4.8337308329664984E-12" />
+      <entry key="MS500" value="0.0054561952899500055" />
+      <entry key="S2" value="0.2996228198569728" />
+      <entry key="S5" value="0.9237699489577189" />
+      <entry key="S10" value="1.6918933700533876" />
+      <entry key="S30" value="3.3907347332605315" />
+      <entry key="S60" value="4.419455048470099" />
+      <entry key="M2" value="5.468743499579008" />
+      <entry key="M5" value="8.502218087040902" />
+      <entry key="M10" value="18.172027874000328" />
+      <entry key="M15" value="32.069550480406996" />
+      <entry key="M30" value="76.31218177602075" />
+      <entry key="H1" value="137.58014263032993" />
+      <entry key="H2" value="194.6418383565393" />
+      <entry key="H4" value="235.28516496803596" />
+      <entry key="D1" value="278.19719694670647" />
+      <entry key="W1" value="286.57188520702186" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2,
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3I07w5wvBmVArIhmwQc2DwlAlFu" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "KEY_CHAT_IN_TOOLWINDOW": "false",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true"
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Users\\hello\\WebstormProjects\\nextjs_one\\node_modules\\typescript\\lib"
   }
 }]]></component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -52,10 +156,26 @@
       <updated>1786889867778</updated>
       <workItem from="1786889868795" duration="200000" />
       <workItem from="1786890078709" duration="25000" />
+      <workItem from="1787050680348" duration="826000" />
+      <workItem from="1787060942668" duration="5388000" />
+      <workItem from="1787069463173" duration="749000" />
+      <workItem from="1787150953490" duration="3644000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/lib/constants.ts</url>
+          <line>20</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
