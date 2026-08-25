@@ -16,8 +16,6 @@ declare global {
   var mongooseCache: MongooseCache | undefined;
 }
 
-const MONGODB_URI = process.env.MONGODB_URI;
-
 /**
  * Global variable reference to preserve connection across HMR (Hot Module Replacement)
  * in Next.js development environment.
@@ -34,12 +32,6 @@ if (!global.mongooseCache) {
  * @returns {Promise<Mongoose>} The active Mongoose instance.
  */
 export async function connectToDatabase(): Promise<Mongoose> {
-  if (!MONGODB_URI) {
-    throw new Error(
-      'Please define the MONGODB_URI environment variable inside .env or .env.local'
-    );
-  }
-
   // Return existing active connection if available
   if (cached.conn) {
     return cached.conn;
@@ -47,6 +39,14 @@ export async function connectToDatabase(): Promise<Mongoose> {
 
   // Create connection promise if none exists to handle concurrent requests
   if (!cached.promise) {
+    const MONGODB_URI = process.env.MONGODB_URI;
+
+    if (!MONGODB_URI) {
+      throw new Error(
+        'Please define the MONGODB_URI environment variable inside .env or .env.local'
+      );
+    }
+
     const opts = {
       bufferCommands: false,
     };
@@ -67,5 +67,7 @@ export async function connectToDatabase(): Promise<Mongoose> {
 
   return cached.conn;
 }
+
+export const connectDB = connectToDatabase;
 
 export default connectToDatabase;
