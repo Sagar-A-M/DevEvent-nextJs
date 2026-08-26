@@ -1,4 +1,8 @@
 import mongoose, { Mongoose } from 'mongoose';
+import dns from 'dns';
+
+// Set public DNS servers to resolve MongoDB Atlas SRV records if local DNS fails
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 /**
  * Interface for the cached Mongoose connection object stored on global scope.
@@ -32,6 +36,13 @@ if (!global.mongooseCache) {
  * @returns {Promise<Mongoose>} The active Mongoose instance.
  */
 export async function connectToDatabase(): Promise<Mongoose> {
+  // Set public DNS servers to resolve MongoDB Atlas SRV records if local DNS fails
+  try {
+    dns.setServers(['8.8.8.8', '1.1.1.1']);
+  } catch (e) {
+    console.warn('Failed to set custom DNS servers', e);
+  }
+
   // Return existing active connection if available
   if (cached.conn) {
     return cached.conn;

@@ -92,9 +92,6 @@ const EventSchema = new Schema<IEvent>(
   }
 );
 
-// Ensure index on slug for fast lookup and uniqueness
-EventSchema.index({ slug: 1 }, { unique: true });
-
 /**
  * Pre-save hook:
  * 1. Validates required string fields are non-empty after trimming.
