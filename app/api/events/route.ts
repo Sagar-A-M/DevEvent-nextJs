@@ -31,8 +31,25 @@ export async function POST(
             return NextResponse.json({ message: 'Image file is required and must be a valid file' }, { status: 400 });
         }
 
-        const tags = JSON.parse(formData.get('tags') as string);
-        const agenda = JSON.parse(formData.get('agenda') as string);
+        let tags: string[];
+        let agenda: string[];
+        try {
+            const rawTags = formData.get('tags');
+            const rawAgenda = formData.get('agenda');
+
+            if (!rawTags || !rawAgenda) {
+                return NextResponse.json({ message: 'Tags and agenda are required' }, { status: 400 });
+            }
+
+            tags = typeof rawTags === 'string' ? JSON.parse(rawTags) : rawTags;
+            agenda = typeof rawAgenda === 'string' ? JSON.parse(rawAgenda) : rawAgenda;
+
+            if (!Array.isArray(tags) || !Array.isArray(agenda)) {
+                return NextResponse.json({ message: 'Tags and agenda must be valid arrays' }, { status: 400 });
+            }
+        } catch {
+            return NextResponse.json({ message: 'Invalid JSON format for tags or agenda' }, { status: 400 });
+        }
 
 
         const arrayBuffer = await (file as File).arrayBuffer();

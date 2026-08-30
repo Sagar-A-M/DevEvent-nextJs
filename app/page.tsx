@@ -6,14 +6,18 @@ import connectToDatabase from "@/lib/mongodb";
 import { Event } from "@/database/event.model";
 import { cacheLife, cacheTag } from "next/cache";
 
-const getEvents = async (): Promise<IEvent[]> => {
+const fetchEventsFromDb = async (): Promise<IEvent[]> => {
   'use cache';
   cacheLife('hours');
   cacheTag('events');
+  await connectToDatabase();
+  const events = await Event.find().sort({ createdAt: -1 }).lean();
+  return JSON.parse(JSON.stringify(events)) as IEvent[];
+};
+
+const getEvents = async (): Promise<IEvent[]> => {
   try {
-    await connectToDatabase();
-    const events = await Event.find().sort({ createdAt: -1 }).lean();
-    return JSON.parse(JSON.stringify(events)) as IEvent[];
+    return await fetchEventsFromDb();
   } catch (error) {
     console.error("Failed to fetch events on homepage:", error);
     return [];
@@ -39,7 +43,7 @@ const Page = async () => {
         <div className="ml-7 mr-7">
           <h3>Featured Events</h3>
           <br />
-          <ul className="events">
+          <ul id="events" className="events">
             {events &&
               events.length > 0 &&
               events.map((event: IEvent) => (
