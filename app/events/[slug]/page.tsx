@@ -3,6 +3,9 @@ import Image from "next/image";
 import BookEvent from "@/components/BookEvent";
 import { GetSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import { IEvent } from "@/database";
+import { Event } from "@/database/event.model";
+import connectToDatabase from "@/lib/mongodb";
+import { cacheLife, cacheTag } from "next/cache";
 import EventCard from "@/components/EventCard";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -72,19 +75,48 @@ const parseArrayField = (data: unknown): string[] => {
   return [];
 };
 
+const fetchEventBySlug = async (slug: string): Promise<IEvent | null> => {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('event-details');
+  await connectToDatabase();
+  const event = await Event.findOne({ slug: slug.trim().toLowerCase() }).lean();
+  if (!event) return null;
+  return JSON.parse(JSON.stringify(event)) as IEvent;
+};
+
+const getEventBySlug = async (slug: string): Promise<IEvent | null> => {
+  try {
+    return await fetchEventBySlug(slug);
+  } catch (error) {
+    console.error("Failed to fetch event by slug:", error);
+    return null;
+  }
+};
+
+export const instant = false;
+
+export async function generateStaticParams() {
+  try {
+    await connectToDatabase();
+    const events = await Event.find({}, { slug: 1 }).lean();
+    return events.map((event) => ({
+      slug: event.slug,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params:", error);
+    return [];
+  }
+}
+
 const EventDetailsPage = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const request = await fetch(`${BASE_URL}/api/events/${slug}`);
+  const event = await getEventBySlug(slug);
 
-  if (request.status === 404) return notFound();
-  if (!request.ok)
-    throw new Error(`Failed to fetch event details (${request.status})`);
-
-  const { event } = await request.json();
   if (!event) return notFound();
 
   const {
