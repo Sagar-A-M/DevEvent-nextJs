@@ -76,9 +76,9 @@ const parseArrayField = (data: unknown): string[] => {
 };
 
 const fetchEventBySlug = async (slug: string): Promise<IEvent | null> => {
-  'use cache';
-  cacheLife('hours');
-  cacheTag('event-details');
+  "use cache";
+  cacheLife("hours");
+  cacheTag("event-details");
   await connectToDatabase();
   const event = await Event.findOne({ slug: slug.trim().toLowerCase() }).lean();
   if (!event) return null;
@@ -114,6 +114,8 @@ const EventDetailsPage = async ({
 }: {
   params: Promise<{ slug: string }>;
 }) => {
+  "use cache";
+  cacheLife("hours");
   const { slug } = await params;
   const event = await getEventBySlug(slug);
 
@@ -210,7 +212,7 @@ const EventDetailsPage = async ({
               <p className="text-sm">Be the first to book your spot!</p>
             )}
 
-            <BookEvent />
+            <BookEvent eventId={event._id || ""} slug={event.slug} />
           </div>
         </aside>
       </div>

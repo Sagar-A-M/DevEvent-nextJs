@@ -4,6 +4,7 @@ import { Schema, model, models, Model } from 'mongoose';
  * Interface representing the Event document structure.
  */
 export interface IEvent {
+  _id?: string
   title: string;
   slug: string;
   description: string;
