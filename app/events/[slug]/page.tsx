@@ -94,6 +94,21 @@ const getEventBySlug = async (slug: string): Promise<IEvent | null> => {
   }
 };
 
+export const instant = false;
+
+export async function generateStaticParams() {
+  try {
+    await connectToDatabase();
+    const events = await Event.find({}, { slug: 1 }).lean();
+    return events.map((event) => ({
+      slug: event.slug,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params:", error);
+    return [];
+  }
+}
+
 const EventDetailsPage = async ({
   params,
 }: {
