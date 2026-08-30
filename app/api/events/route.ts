@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import connectToDatabase from "@/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { v2 as cloudinary } from 'cloudinary';
 import { Event } from "@/database/event.model";
 
@@ -24,34 +25,55 @@ export async function POST(
 
         }
 
-        const file = formData.get('image') as File;
+        const file = formData.get('image');
 
-        if(!file) return NextResponse.json({ message: 'Image file is required'}, {status: 400});
+        if (!file || typeof file === 'string' || typeof (file as File).arrayBuffer !== 'function') {
+            return NextResponse.json({ message: 'Image file is required and must be a valid file' }, { status: 400 });
+        }
 
-        const arrayBuffer = await file.arrayBuffer();
+        const tags = JSON.parse(formData.get('tags') as string);
+        const agenda = JSON.parse(formData.get('agenda') as string);
+
+
+        const arrayBuffer = await (file as File).arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        const uploadResult = await new Promise((resolve, reject) => {
+        const uploadResult = await new Promise<{ secure_url: string; public_id: string }>((resolve, reject) => {
+            cloudinary.uploader.upload_stream({ resource_type: 'image', folder: 'DevEvents' }, (error, results) => {
+                if (error) return reject(error);
+                resolve(results as { secure_url: string; public_id: string });
+            }).end(buffer);
+        });
 
-            cloudinary.uploader.upload_stream( { resource_type: 'image', folder: 'DevEvents' }, (error, results) => {
-                if(error) return reject(error);
-                
-                resolve(results)
-            }).end(buffer)
+        event.image = uploadResult.secure_url;
 
-        })
+        let createEvent;
+        try {
+            createEvent = await Event.create({
+                ...event,
+                tags: tags,
+                agenda: agenda,
+            });
 
-        event.image = (uploadResult as { secure_url: string }).secure_url;
-
-        const createEvent = await Event.create(event);
+            // Revalidate homepage and events cache so new entries immediately reflect on the webpage
+            revalidatePath('/');
+            revalidateTag('events', 'max');
+        } catch (dbError) {
+            if (uploadResult?.public_id) {
+                try {
+                    await cloudinary.uploader.destroy(uploadResult.public_id);
+                } catch (destroyErr) {
+                    console.error('Failed to cleanup Cloudinary asset:', destroyErr);
+                }
+            }
+            throw dbError;
+        }
 
         return NextResponse.json({ message: 'Event created successfully', event: createEvent }, { status: 201 });
 
     } catch (e) {
-
-        console.error(e);
+        console.error('POST /api/events error:', e);
         return NextResponse.json({ message: 'Event creation failed', error: e instanceof Error ? e.message : 'Unknown' }, { status: 500 });
-
     }
 }
 
